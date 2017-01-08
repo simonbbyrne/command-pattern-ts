@@ -13,21 +13,15 @@ export class Invoker {
 
         switch (fn) {
             case 'config':
-                this.invoke(new ConfigCommand(data));
+                new ConfigCommand(data).execute();
                 break;
             case 'log':
-                this.invoke(new LogCommand(data));
+                new LogCommand(data).execute();
                 break;
             case 'error':
-                this.invoke(new ErrorCommand(data));
+                new ErrorCommand(data).execute();
                 break;
         }
     };
 
-    /**
-     * Invoke a concrete command
-     */
-    private invoke(command: Command): void {
-        command.execute();
-    }
 }

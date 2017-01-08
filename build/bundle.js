@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7f4cb054523df18c74fa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5deeea084c49999f01c3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -595,7 +595,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("\"use strict\";\nvar commands_1 = __webpack_require__(3);\nvar Invoker = (function () {\n    function Invoker() {\n    }\n    Invoker.prototype.execute = function (command) {\n        var fn = command[0];\n        var data = command[1];\n        switch (fn) {\n            case 'config':\n                this.invoke(new commands_1.ConfigCommand(data));\n                break;\n            case 'log':\n                this.invoke(new commands_1.LogCommand(data));\n                break;\n            case 'error':\n                this.invoke(new commands_1.ErrorCommand(data));\n                break;\n        }\n    };\n    ;\n    Invoker.prototype.invoke = function (command) {\n        command.execute();\n    };\n    return Invoker;\n}());\nexports.Invoker = Invoker;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/invoker.ts\n// module id = 2\n// module chunks = 0\n//# sourceURL=webpack:///./src/invoker.ts?");
+	eval("\"use strict\";\nvar commands_1 = __webpack_require__(3);\nvar Invoker = (function () {\n    function Invoker() {\n    }\n    /**\n     * Execute a command\n     */\n    Invoker.prototype.execute = function (command) {\n        var fn = command[0];\n        var data = command[1];\n        switch (fn) {\n            case 'config':\n                new commands_1.ConfigCommand(data).execute();\n                break;\n            case 'log':\n                this.invoke(new commands_1.LogCommand(data));\n                break;\n            case 'error':\n                this.invoke(new commands_1.ErrorCommand(data));\n                break;\n        }\n    };\n    ;\n    /**\n     * Invoke a concrete command\n     */\n    Invoker.prototype.invoke = function (command) {\n        command.execute();\n    };\n    return Invoker;\n}());\nexports.Invoker = Invoker;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/invoker.ts\n// module id = 2\n// module chunks = 0\n//# sourceURL=webpack:///./src/invoker.ts?");
 
 /***/ },
 /* 3 */
