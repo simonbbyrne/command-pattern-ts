@@ -22,6 +22,6 @@ export class Invoker {
                 new ErrorCommand(data).execute();
                 break;
         }
-    };
+    }
 
 }
