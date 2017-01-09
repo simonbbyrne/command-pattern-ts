@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "04e3141b409a86dfd442"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e67f584ec8023ff73d65"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -589,25 +589,25 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("\"use strict\";\nvar invoker_1 = __webpack_require__(2);\nvar commands = [\n    ['config', { a: 'a' }],\n    ['log', 'a log message'],\n    ['error', 'an error message'],\n    ['log', 'another log message'],\n];\nvar invoker = new invoker_1.Invoker();\nfor (var _i = 0, commands_1 = commands; _i < commands_1.length; _i++) {\n    var command = commands_1[_i];\n    invoker.execute(command);\n}\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/main.ts\n// module id = 1\n// module chunks = 0\n//# sourceURL=webpack:///./src/main.ts?");
+	eval("\"use strict\";\r\nvar invoker_1 = __webpack_require__(2);\r\nvar commands_1 = __webpack_require__(3);\r\nvar reporter_1 = __webpack_require__(4);\r\nvar commands = [\r\n    ['config', { a: 'a' }],\r\n    ['log', 'a log message'],\r\n    ['error', 'an error message'],\r\n    ['log', 'another log message'],\r\n];\r\nvar invoker = new invoker_1.Invoker();\r\nvar executor = function (command) {\r\n    var fn = command[0];\r\n    var data = command[1];\r\n    switch (fn) {\r\n        case 'config':\r\n            invoker.execute(new commands_1.ConfigCommand(reporter_1.Reporter, data));\r\n            break;\r\n        case 'log':\r\n            invoker.execute(new commands_1.LogCommand(reporter_1.Reporter, data));\r\n            break;\r\n        case 'error':\r\n            invoker.execute(new commands_1.ErrorCommand(reporter_1.Reporter, data));\r\n            break;\r\n    }\r\n};\r\nfor (var _i = 0, commands_2 = commands; _i < commands_2.length; _i++) {\r\n    var command = commands_2[_i];\r\n    executor(command);\r\n}\r\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/main.ts\n// module id = 1\n// module chunks = 0\n//# sourceURL=webpack:///./src/main.ts?");
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("\"use strict\";\nvar commands_1 = __webpack_require__(3);\nvar Invoker = (function () {\n    function Invoker() {\n    }\n    /**\n     * Execute a command\n     */\n    Invoker.prototype.execute = function (command) {\n        var fn = command[0];\n        var data = command[1];\n        switch (fn) {\n            case 'config':\n                new commands_1.ConfigCommand(data).execute();\n                break;\n            case 'log':\n                new commands_1.LogCommand(data).execute();\n                break;\n            case 'error':\n                new commands_1.ErrorCommand(data).execute();\n                break;\n        }\n    };\n    ;\n    return Invoker;\n}());\nexports.Invoker = Invoker;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/invoker.ts\n// module id = 2\n// module chunks = 0\n//# sourceURL=webpack:///./src/invoker.ts?");
+	eval("\"use strict\";\r\nvar Invoker = (function () {\r\n    function Invoker() {\r\n    }\r\n    /**\r\n     * Execute a command\r\n     */\r\n    Invoker.prototype.execute = function (command) {\r\n        command.execute();\r\n    };\r\n    return Invoker;\r\n}());\r\nexports.Invoker = Invoker;\r\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/invoker.ts\n// module id = 2\n// module chunks = 0\n//# sourceURL=webpack:///./src/invoker.ts?");
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	eval("\"use strict\";\nvar reporter_1 = __webpack_require__(4);\nvar ConfigCommand = (function () {\n    function ConfigCommand(conf) {\n        this.conf = conf;\n    }\n    ConfigCommand.prototype.execute = function () {\n        reporter_1.Reporter.config(this.conf);\n    };\n    return ConfigCommand;\n}());\nexports.ConfigCommand = ConfigCommand;\nvar ErrorCommand = (function () {\n    function ErrorCommand(message) {\n        this.message = message;\n    }\n    ErrorCommand.prototype.execute = function () {\n        reporter_1.Reporter.error(this.message);\n    };\n    return ErrorCommand;\n}());\nexports.ErrorCommand = ErrorCommand;\nvar LogCommand = (function () {\n    function LogCommand(message) {\n        this.message = message;\n    }\n    LogCommand.prototype.execute = function () {\n        reporter_1.Reporter.log(this.message);\n    };\n    return LogCommand;\n}());\nexports.LogCommand = LogCommand;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/commands.ts\n// module id = 3\n// module chunks = 0\n//# sourceURL=webpack:///./src/commands.ts?");
+	eval("\"use strict\";\r\nvar ConfigCommand = (function () {\r\n    function ConfigCommand(reporter, conf) {\r\n        this.reporter = reporter;\r\n        this.conf = conf;\r\n    }\r\n    ConfigCommand.prototype.execute = function () {\r\n        this.reporter.config(this.conf);\r\n    };\r\n    return ConfigCommand;\r\n}());\r\nexports.ConfigCommand = ConfigCommand;\r\nvar ErrorCommand = (function () {\r\n    function ErrorCommand(reporter, message) {\r\n        this.reporter = reporter;\r\n        this.message = message;\r\n    }\r\n    ErrorCommand.prototype.execute = function () {\r\n        this.reporter.error(this.message);\r\n    };\r\n    return ErrorCommand;\r\n}());\r\nexports.ErrorCommand = ErrorCommand;\r\nvar LogCommand = (function () {\r\n    function LogCommand(reporter, message) {\r\n        this.reporter = reporter;\r\n        this.message = message;\r\n    }\r\n    LogCommand.prototype.execute = function () {\r\n        this.reporter.log(this.message);\r\n    };\r\n    return LogCommand;\r\n}());\r\nexports.LogCommand = LogCommand;\r\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/commands.ts\n// module id = 3\n// module chunks = 0\n//# sourceURL=webpack:///./src/commands.ts?");
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\nvar Reporter = (function () {\n    function Reporter() {\n    }\n    Reporter.log = function (message) {\n        console.log('LOG: ', message);\n    };\n    Reporter.warn = function (message) {\n        console.log('WARN: ', message);\n    };\n    Reporter.error = function (message) {\n        console.log('ERROR: ', message);\n    };\n    Reporter.config = function (conf) {\n        console.log('CONFIG: ', conf);\n    };\n    return Reporter;\n}());\nexports.Reporter = Reporter;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/reporter.ts\n// module id = 4\n// module chunks = 0\n//# sourceURL=webpack:///./src/reporter.ts?");
+	eval("\"use strict\";\r\nvar Reporter = (function () {\r\n    function Reporter() {\r\n    }\r\n    Reporter.log = function (message) {\r\n        console.log('LOG: ', message);\r\n    };\r\n    Reporter.warn = function (message) {\r\n        console.log('WARN: ', message);\r\n    };\r\n    Reporter.error = function (message) {\r\n        console.log('ERROR: ', message);\r\n    };\r\n    Reporter.config = function (conf) {\r\n        console.log('CONFIG: ', conf);\r\n    };\r\n    return Reporter;\r\n}());\r\nexports.Reporter = Reporter;\r\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/reporter.ts\n// module id = 4\n// module chunks = 0\n//# sourceURL=webpack:///./src/reporter.ts?");
 
 /***/ }
 /******/ ]);

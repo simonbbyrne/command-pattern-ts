@@ -7,30 +7,31 @@ export interface Command {
 
 export class ConfigCommand implements Command {
 
-    constructor(private conf?: any) {
+    constructor(private reporter, private conf?: any) {
     }
 
     execute(): void {
-        Reporter.config(this.conf);
+        this.reporter.config(this.conf);
     }
 }
 
 export class ErrorCommand implements Command {
 
-    constructor(private message?: any) {
+    constructor(private reporter, private message?: any) {
     }
 
     execute(): void {
-        Reporter.error(this.message);
+        this.reporter.error(this.message);
     }
 }
 
 export class LogCommand implements Command {
 
-    constructor(private message?: any) {
+    constructor(private reporter, private message?: any) {
     }
 
     execute(): void {
-        Reporter.log(this.message);
+        this.reporter.log(this.message);
     }
 }
+

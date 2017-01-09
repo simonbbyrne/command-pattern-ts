@@ -6,11 +6,11 @@ export class Reporter {
     }
 
     static warn(message: string): void {
-        console.log('WARN: ', message);        
+        console.log('WARN: ', message);
     }
 
     static error(message: string): void {
-        console.log('ERROR: ', message);        
+        console.log('ERROR: ', message);
     }
 
     static config(conf: any) {
